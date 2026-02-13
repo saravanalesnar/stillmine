@@ -47,37 +47,37 @@
     </div>
 
     <script>
-        function moveButton() {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
-            const noBtn = document.getElementById('noBtn');
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        }
-
         function showLove() {
-            document.body.innerHTML = `
-                <h1>As planet spins around his sun 
-A farm embraces the autumn leaves 
-a cozy dreamless sleep in winters 
+    document.body.innerHTML = `
+        <div style="text-align: center; padding: 20px; animation: fadeIn 2s;">
+            <h1 style="line-height: 1.6; font-size: 1.4rem; color: #ff4d4d;">
+                As planet spins around his sun<br> 
+                A farm embraces the autumn leaves<br> 
+                A cozy dreamless sleep in winters<br><br> 
 
-Sip of a warm tea 
-Old wooden smell on paper books 
-Warmth of heat in cold hearts of mine 
+                Sip of a warm tea<br> 
+                Old wooden smell on paper books<br> 
+                Warmth of heat in cold hearts of mine<br><br> 
 
-Longed comfort of lifetimes 
-Peace silence stability 
-Red roses and letters 
+                Longed comfort of lifetimes<br> 
+                Peace, silence, stability<br> 
+                Red roses and letters<br><br> 
 
-Silence of too much louder 
-Not surfing on surface adventures 
-A warm touch of  love 
-That’s my love 
-That’s she 
-Aarya 🥰</h1>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZContext/your-chosen-valentine-gif.gif" alt="Happy Valentine">
-            `;
-        }
-    </script>
-</body>
-</html>
+                Silence of too much louder<br> 
+                Not surfing on surface adventures<br> 
+                A warm touch of love<br> 
+                That’s my love. That’s she.<br><br> 
+                <strong>Aarya 🥰</strong>
+            </h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/lNy6GscI9S5G7S7u9q/giphy.gif" 
+                 alt="Happy Valentine" 
+                 style="width: 80%; max-width: 300px; border-radius: 15px; margin-top: 20px;">
+        </div>
+        <style>
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        </style>
+    `;
+}
