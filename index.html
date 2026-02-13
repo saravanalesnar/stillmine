@@ -14,14 +14,18 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #ffe6e6;
-            overflow: hidden;
+            overflow: hidden; /* Important so no scrollbars appear when button moves */
+        }
+        h1 {
+            text-align: center;
+            padding: 0 20px;
         }
         .buttons {
             margin-top: 20px;
-            position: relative;
             display: flex;
             gap: 20px;
-            height: 50px; /* Space for buttons */
+            align-items: center;
+            justify-content: center;
         }
         button {
             padding: 15px 30px;
@@ -29,40 +33,47 @@
             cursor: pointer;
             border-radius: 10px;
             border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        #yesBtn { background-color: #ff4d4d; color: white; }
-        #noBtn { 
-            background-color: #808080; 
-            color: white; 
-            position: absolute; 
-            transition: 0.1s; 
+        #yesBtn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        #noBtn {
+            background-color: #808080;
+            color: white;
+            position: fixed; /* Changed to fixed so it moves relative to the whole screen */
+            z-index: 999;
         }
     </style>
 </head>
 <body>
 
-    <div id="mainContent" style="text-align: center;">
+    <div id="mainContent">
         <h1>Will you be my Valentine, Kaviya? ❤️</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="showLove()">Yes</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
         </div>
     </div>
 
     <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
+            
+            // Calculate random coordinates based on screen size
+            // Subtracting 150 to keep the button from going off the right/bottom edge
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 150);
+            
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
 
         async function showLove() {
-            let poem = "As planet spins around his sun...\n(Loading your poem...)";
+            let poem = "";
             
             try {
-                // We use a relative path './' to find the file in your repo
                 const response = await fetch('./poem.txt');
                 if (response.ok) {
                     poem = await response.text();
@@ -70,12 +81,12 @@
                     throw new Error();
                 }
             } catch (e) {
-                // FALLBACK: If poem.txt is missing, it shows this instead of a blank screen
+                // The poem is hardcoded here as a backup in case the file doesn't load
                 poem = `As planet spins around his sun\nA farm embraces the autumn leaves\na cozy dreamless sleep in winters\n\nSip of a warm tea\nOld wooden smell on paper books\nWarmth of heat in cold hearts of mine\n\nLonged comfort of lifetimes\nPeace silence stability\nRed roses and letters\n\nSilence of too much louder\nNot surfing on surface adventures\nA warm touch of love\nThat’s my love\nThat’s she\nAarya 🥰`;
             }
 
             document.body.innerHTML = `
-                <div style="text-align: center; padding: 20px; animation: fadeIn 1.5s;">
+                <div style="text-align: center; padding: 20px; animation: fadeIn 1.5s; overflow-y: auto; max-height: 100vh;">
                     <h1 style="white-space: pre-line; line-height: 1.5; font-size: 1.2rem; color: #ff4d4d;">
                         ${poem}
                     </h1>
