@@ -11,11 +11,17 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #ffe6e6;
+            overflow: hidden;
         }
         .buttons {
             margin-top: 20px;
+            position: relative;
+            display: flex;
+            gap: 20px;
+            height: 50px; /* Space for buttons */
         }
         button {
             padding: 15px 30px;
@@ -24,57 +30,61 @@
             border-radius: 10px;
             border: none;
         }
-        #yesBtn {
-            background-color: #ff4d4d;
-            color: white;
-        }
-        #noBtn {
-            background-color: #808080;
-            color: white;
-            position: absolute; /* Vital for movement */
+        #yesBtn { background-color: #ff4d4d; color: white; }
+        #noBtn { 
+            background-color: #808080; 
+            color: white; 
+            position: absolute; 
+            transition: 0.1s; 
         }
     </style>
 </head>
 <body>
 
-    <h1>Will you be my Valentine? ❤️</h1>
-    <div id="gifContainer">
+    <div id="mainContent" style="text-align: center;">
+        <h1>Will you be my Valentine, Kaviya? ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="showLove()">Yes</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
         </div>
-
-    <div class="buttons">
-        <button id="yesBtn" onclick="showLove()">Yes</button>
-        <button id="noBtn" onmouseover="moveButton()">No</button>
     </div>
 
     <script>
         function moveButton() {
+            const noBtn = document.getElementById('noBtn');
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 100);
-            const noBtn = document.getElementById('noBtn');
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
 
         async function showLove() {
-    try {
-        // 1. Fetch the text file
-        const response = await fetch('poem.txt');
-        const poemText = await response.text();
+            let poem = "As planet spins around his sun...\n(Loading your poem...)";
+            
+            try {
+                // We use a relative path './' to find the file in your repo
+                const response = await fetch('./poem.txt');
+                if (response.ok) {
+                    poem = await response.text();
+                } else {
+                    throw new Error();
+                }
+            } catch (e) {
+                // FALLBACK: If poem.txt is missing, it shows this instead of a blank screen
+                poem = `As planet spins around his sun\nA farm embraces the autumn leaves\na cozy dreamless sleep in winters\n\nSip of a warm tea\nOld wooden smell on paper books\nWarmth of heat in cold hearts of mine\n\nLonged comfort of lifetimes\nPeace silence stability\nRed roses and letters\n\nSilence of too much louder\nNot surfing on surface adventures\nA warm touch of love\nThat’s my love\nThat’s she\nAarya 🥰`;
+            }
 
-        // 2. Change the screen content
-        document.body.innerHTML = `
-            <div style="text-align: center; padding: 20px;">
-                <h1 id="poemDisplay" style="white-space: pre-line; line-height: 1.6; font-size: 1.4rem; color: #ff4d4d;">
-                    ${poemText}
-                </h1>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/lNy6GscI9S5G7S7u9q/giphy.gif" 
-                     style="width: 80%; max-width: 300px; border-radius: 15px; margin-top: 20px;">
-            </div>
-        `;
-    } catch (error) {
-        console.error("Could not load the poem:", error);
-    }
-}
+            document.body.innerHTML = `
+                <div style="text-align: center; padding: 20px; animation: fadeIn 1.5s;">
+                    <h1 style="white-space: pre-line; line-height: 1.5; font-size: 1.2rem; color: #ff4d4d;">
+                        ${poem}
+                    </h1>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/lNy6GscI9S5G7S7u9q/giphy.gif" 
+                         style="width: 200px; border-radius: 15px; margin-top: 10px;">
+                </div>
+                <style>@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }</style>
+            `;
+        }
     </script>
 </body>
 </html>
