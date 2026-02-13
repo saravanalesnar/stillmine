@@ -14,11 +14,12 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #ffe6e6;
-            overflow: hidden; /* Important so no scrollbars appear when button moves */
+            overflow: hidden;
         }
         h1 {
             text-align: center;
             padding: 0 20px;
+            color: #333;
         }
         .buttons {
             margin-top: 20px;
@@ -42,7 +43,7 @@
         #noBtn {
             background-color: #808080;
             color: white;
-            position: fixed; /* Changed to fixed so it moves relative to the whole screen */
+            position: fixed; 
             z-index: 999;
         }
     </style>
@@ -60,12 +61,8 @@
     <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            
-            // Calculate random coordinates based on screen size
-            // Subtracting 150 to keep the button from going off the right/bottom edge
             const x = Math.random() * (window.innerWidth - 150);
             const y = Math.random() * (window.innerHeight - 150);
-            
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
@@ -81,19 +78,26 @@
                     throw new Error();
                 }
             } catch (e) {
-                // The poem is hardcoded here as a backup in case the file doesn't load
+                // Manual fallback if the file doesn't load
                 poem = `As planet spins around his sun\nA farm embraces the autumn leaves\na cozy dreamless sleep in winters\n\nSip of a warm tea\nOld wooden smell on paper books\nWarmth of heat in cold hearts of mine\n\nLonged comfort of lifetimes\nPeace silence stability\nRed roses and letters\n\nSilence of too much louder\nNot surfing on surface adventures\nA warm touch of love\nThat’s my love\nThat’s she\nAarya 🥰`;
             }
 
             document.body.innerHTML = `
-                <div style="text-align: center; padding: 20px; animation: fadeIn 1.5s; overflow-y: auto; max-height: 100vh;">
-                    <h1 style="white-space: pre-line; line-height: 1.5; font-size: 1.2rem; color: #ff4d4d;">
+                <div style="text-align: center; padding: 20px; animation: fadeIn 2s; overflow-y: auto; max-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+                    <img src="our-photo.jpg" 
+                         alt="Kaviya" 
+                         style="width: 85%; max-width: 350px; border: 8px solid white; border-radius: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); margin-bottom: 25px;">
+
+                    <h1 style="white-space: pre-line; line-height: 1.6; font-size: 1.25rem; color: #ff4d4d; font-weight: normal; margin-top: 0;">
                         ${poem}
                     </h1>
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/lNy6GscI9S5G7S7u9q/giphy.gif" 
-                         style="width: 200px; border-radius: 15px; margin-top: 10px;">
                 </div>
-                <style>@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }</style>
+                <style>
+                    @keyframes fadeIn { 
+                        from { opacity: 0; transform: translateY(20px); } 
+                        to { opacity: 1; transform: translateY(0); } 
+                    }
+                </style>
             `;
         }
     </script>
