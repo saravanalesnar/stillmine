@@ -1,0 +1,20 @@
+async function showLove() {
+    try {
+        // 1. Fetch the text file
+        const response = await fetch('poem.txt');
+        const poemText = await response.text();
+
+        // 2. Change the screen content
+        document.body.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <h1 id="poemDisplay" style="white-space: pre-line; line-height: 1.6; font-size: 1.4rem; color: #ff4d4d;">
+                    ${poemText}
+                </h1>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/lNy6GscI9S5G7S7u9q/giphy.gif" 
+                     style="width: 80%; max-width: 300px; border-radius: 15px; margin-top: 20px;">
+            </div>
+        `;
+    } catch (error) {
+        console.error("Could not load the poem:", error);
+    }
+}
