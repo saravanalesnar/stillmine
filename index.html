@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 10px;
+            border: none;
+        }
+        #yesBtn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        #noBtn {
+            background-color: #808080;
+            color: white;
+            position: absolute; /* Vital for movement */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine Kaviya? ❤️</h1>
+    <div id="gifContainer">
+        </div>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="showLove()">Yes</button>
+        <button id="noBtn" onmouseover="moveButton()">No</button>
+    </div>
+
+    <script>
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function showLove() {
+            document.body.innerHTML = `
+                <h1>As planet spins around his sun 
+A farm embraces the autumn leaves 
+a cozy dreamless sleep in winters 
+
+Sip of a warm tea 
+Old wooden smell on paper books 
+Warmth of heat in cold hearts of mine 
+
+Longed comfort of lifetimes 
+Peace silence stability 
+Red roses and letters 
+
+Silence of too much louder 
+Not surfing on surface adventures 
+A warm touch of  love 
+That’s my love 
+That’s she 
+Aarya 🥰</h1>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZContext/your-chosen-valentine-gif.gif" alt="Happy Valentine">
+            `;
+        }
+    </script>
+</body>
+</html>
